@@ -1,0 +1,36 @@
+Redis:
+  Host: "127.0.0.1"
+  Port: 6379
+  Auth: "zyj123456"
+  MaxIdle: 10
+  MaxActive: 1000
+  IdleTimeout: 60
+  IndexDb: 1
+  ConnFailRetryTimes: 3    #从连接池获取连接失败，最大重试次数
+  ReConnectInterval: 1     # 从连接池获取连接失败，每次重试之间间隔的秒数
+
+Logs:
+  GinLogName: "/storage/logs/gin.log"                  #设置 gin 框架的接口访问日志
+  GoSkeletonLogName: "/storage/logs/goskeleton.log"    #设置GoSkeleton项目骨架运行时日志文件名，注意该名称不要与上一条重复 ,避免和 gin 框架的日志掺杂一起，造成混乱。
+  TextFormat: "json"                                #记录日志的格式，参数选项：console、json ， console 表示一般的文本格式
+  TimePrecision: "millisecond"                         #记录日志时，相关的时间精度，该参数选项：second  、 millisecond ， 分别表示 秒 和 毫秒 ,默认为毫秒级别
+  MaxSize: 10                                           #每个日志的最大尺寸(以MB为单位）， 超过该值，系统将会自动进行切割
+  MaxBackups: 7                                        #保留旧日志最大个数
+  MaxAge: 15                                           #保留旧日志最大天数
+  Compress: false                                      #日志备份时，是否进行压缩
+Database: # 只针对 gorm 操作数据库有效
+  Connection: "mysql"  # 备选项 mysql 、sqlserver、 postgresql
+  Mysql:
+      SlowThreshold: 30            # 慢 SQL 阈值(sql执行时间超过此时间单位（秒），就会触发系统日志记录)
+      Host: "127.0.0.1"
+      DataBase: "middlelib"
+      Port: 3307
+      Prefix: ""
+      UserName: "root"
+      PassWord: "123456"
+      Charset: "utf8mb4"
+      MaxIdleConnections: 10
+      MaxOpenConnections: 128
+      MaxLifeSeconds: 60    # 连接不活动时的最大生存时间(秒)
+      #ReConnectInterval: 1    # 保留项,重连数据库间隔秒数
+      #PingFailRetryTimes: 3   # 保留项,最大重连次数
